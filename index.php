@@ -1,32 +1,33 @@
 <?php
 $retorno = '';
-$numVerifyKEY = '51366086e5b909d0f2309b843e8917b0'; // create your API key here: https://numverify.com/
+$numVerifyKEY = '51366086e5b909d0f2309b843e8917b0'; // criar sua chave de API no link, em breve irei desativar esta chave: https://numverify.com/
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // file sent from form 
 
-    if (isset($_FILES['arquivo'])) {
+    if (isset($_FILES['arquivo'])) { // existe arquivo?
         $errors = array();
-        $file_name = $_FILES['arquivo']['name'];
-        $file_size = $_FILES['arquivo']['size'];
-        $file_tmp = $_FILES['arquivo']['tmp_name'];
-        $file_type = $_FILES['arquivo']['type'];
-        $file_ext = substr(strrchr($file_name, '.'), 1); // strrchr extrai a string após o última (.) e substr corta o (.)   
+        $file_name = $_FILES['arquivo']['name']; // obter nome do arquivo
+        $file_size = $_FILES['arquivo']['size']; // obter o tamanho do arquivo
+        $file_tmp = $_FILES['arquivo']['tmp_name']; // obter o local temporário aramzenado no servidor
+        $file_type = $_FILES['arquivo']['type']; // obter o tipo do arquivo, txt json e etc
+        $file_ext = substr(strrchr($file_name, '.'), 1); // obter a extensão do arquivo. strrchr extrai a string após o última (.) e substr corta o (.)   
 
         $expensions = array("txt");
 
-        if (in_array($file_ext, $expensions) === false) {
+        if (in_array($file_ext, $expensions) === false) { // arquivo não é da extensão txt?
             $errors[] = "Extensão Não Permitida, Favor Escolher Um Arquivo no Formato: txt";
         }
 
-        if ($file_size > 2097152) {
+        if ($file_size > 2097152) { // o tamanho do arquivo é maior que 2 MEGAS?
             $errors[] = 'O Arquivo Deve Ter o Tamanho Máximo de 2 MegaByte';
         }
 
+        // se não existe nenhum erro com o arquivo, prossegue na avaliação
         if (empty($errors) == true) {
 
-            $filestring = file_get_contents($file_tmp);
-            $filearray = explode("\n", $filestring);
+            $filestring = file_get_contents($file_tmp); // obter conteúdo do arquivo
+            $filearray = explode("\n", $filestring); // quebrar o conteu do arquivo wem parágrafo
             $telefoneValido = true;
             $numeroBlackList = false;
             $dddSaoPaulo = false;
@@ -38,12 +39,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (!empty($valueAtual)) {
                     // echo gettype($value); // STRING // echo $valueAtual; // print_r($arrayvalues[0]); // echo "<br />";
                     $arrayvalues = explode(";", $valueAtual);
-                    $idMensagem = $arrayvalues[0];
-                    $ddd = $arrayvalues[1];
-                    $celular = $arrayvalues[2];
-                    $operadora = $arrayvalues[3];
-                    $horarioEnvio = $arrayvalues[4];
-                    $mensagem = $arrayvalues[5];
+                    $idMensagem = $arrayvalues[0]; // obter id da mensagem
+                    $ddd = $arrayvalues[1]; // obter o ddd
+                    $celular = $arrayvalues[2]; // obter o celular
+                    $operadora = $arrayvalues[3]; // obter a operadora
+                    $horarioEnvio = $arrayvalues[4]; // obter o horário d envio
+                    $mensagem = $arrayvalues[5]; // obter a mensagem
 
                     // verificar se o telefone é VÁLIDO baseado nas seguintes regras:
                     // DDD com 2 digitos; // strlen($ddd);
@@ -61,8 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $response = curl_exec($clientCheckPhone);
                         $resultCheckPhone = json_decode($response, true);
                         $numValid = array_values($resultCheckPhone);
-                        if ($numValid[0] == 1
-                        ) {
+                        if ($numValid[0] == 1) {
                             // echo "Número Válido.";
                             // echo "<br />";
                             $telefoneValido = true;
@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         // echo "<br />";
                         $telefoneValido = false;
                     }
-                                        
+
 
                     // verificar se o telefone esta na Black List
                     // https://front-test-pg.herokuapp.com/blacklist/
@@ -135,14 +135,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $mensagemAcimaLimite = false;
                     }
 
-                    // adicionar na variavel de retorno a mensagem que encaixa nos critérios
+                    // proseeguir com a análise caso a mesnagem se encaixe nos critérios
                     // o número é válido
                     // o número não esta na black list
                     // o ddd não é do Estado de São Paulo
                     // a data de envio não é acima das 19:59:59
                     // conteúdo da mensagem não tem mais de 140 caracteres
                     if ($telefoneValido == true && $numeroBlackList == false && $dddSaoPaulo == false && $dataLimiteAcima == false && $mensagemAcimaLimite == false) {
-                       // array_push($arrayTemp, $valueAtual);
+                        // array_push($arrayTemp, $valueAtual);
                         // e por último. verificar a duplicadade no telefone de destino
                         // se o número do destino tiver mais de 1, enviar a mensagem com a menor data de envio
                         $index = 0;
@@ -151,12 +151,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 $valueTemp = explode(";", $valueTemp);
                                 $phoneTemp = $valueTemp[1] . $valueTemp[2];
                                 $phoneAtual = $ddd . $celular;
-                                
+
                                 if ($phoneAtual == $phoneTemp) { // phone destinatário atual igual ao phone destinatário do array?
                                     if ($horarioEnvio < $valueTemp[4]) { // horario de envio atual menor que o horário de envio na variavel TEMP?
                                         // remover este index do array TEMP
                                         //echo print_r($arrayTemp);
-                                       // echo "<br />";
+                                        // echo "<br />";
                                         unset($arrayTemp[$index]);
                                         //echo print_r($arrayTemp);
                                         //echo "<br />";
@@ -165,28 +165,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         $arrayTemp = array_unique($arrayTemp); // remove valor duplicado
                                         $index++;
                                     }
-
                                 } else {
                                     array_push($arrayTemp, $valueAtual);
                                     $arrayTemp = array_unique($arrayTemp); // remove valor duplicado
                                     $index++;
                                 }
                             }
-                            
                         } else {
                             array_push($arrayTemp, $valueAtual);
                             $arrayTemp = array_unique($arrayTemp); // remove valor duplicado
                         }
                     }
-                    
                 }
             }
             // fim do foreach
             // pegar os dados do array TEMP, formatar e armazenar na variável de retorno
             foreach ($arrayTemp as $valueTemp2) {
                 $valueTemp2 = explode(";", $valueTemp2);
-               //  print_r($valueTemp2);
-              //   echo "<br />";
+                //  print_r($valueTemp2);
+                //   echo "<br />";
                 // definir o IDBROCKER
                 if ($valueTemp2[3] == 'VIVO' || $valueTemp2[3] == 'TIM')
                     $broker = 1;
@@ -198,13 +195,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $retorno = $retorno . $resultado;
             }
             echo $retorno;
-
         } else {
             print_r($errors);
         }
-        
     }
-
 }
 ?>
 
@@ -245,6 +239,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="splash-container">
         <div class="card ">
             <div class="card-header text-center">
+                <!-- variavle retorno, aonde sera mostrado o resultado final -->
                 <?php echo $retorno  ?>
                 <hr>
                 <span class="splash-description">Selecione Algum Arquivo do Tipo txt</span>
