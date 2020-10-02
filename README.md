@@ -3,7 +3,7 @@
 # Início
  1. Configuração do Ambiente de Desenvolvimento
     Baixe e instale o Servidor de Desenvolvimento Xampp (Instale Apenas o Servidor Para PHP): https://www.apachefriends.org/download.html
-# 2. Clone ou Faça Download do Projeto
+## 2. Clone ou Faça Download do Projeto
     Clone o repositório (dentro da pasta: C:\xampp\htdocs) usando os comandos a seguir:
     $ git clone https://github.com/leogildo10/TESTEPGMAIS.git
     $ cd TESTEPGMAIS/
