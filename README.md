@@ -9,7 +9,7 @@
 #### 2.1. Faça Download do Projeto
     Faça download do repositório 
 #### 3. Rodar o Projeto
-   Copie e Cole o Projeto Baixado dentro da pasta: C:\xampp\htdocs  
+   . Copie e Cole o Projeto Baixado dentro da pasta: C:\xampp\htdocs  
    Abrir o Xammp Control Panel (Na Barra de Pesquisa do Windows Digitar: Xampp Control Panel e Pressionar Enter)  
    No Painel de Controle do Xampp Clicar em Start, Para Iniciar o Servidor  
    Abrir Seu Navegador (Recomendo o Google Chrome) e Digite: http://localhost/TESTEPGMAIS/  
