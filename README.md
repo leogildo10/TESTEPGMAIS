@@ -17,7 +17,8 @@
 #### 4. Funcionalidades
        Abra a Aplicação no Seu Navegador e Selecione o Arquivo Que Se Encontra na Pasta: TESTEPGMAIS Dentro do Seu Servidor Xampp
        Após Selecionar o Arquivo Clicar em Verificar, O Sistema Irá Verificar o Arquivo e Retornar a Lista de Mensagens a Serem Enviadas
-       A verificação é feitas Baseada Nos Critérios do teste da PGMAIS
+       A Verificação é Feitas Baseada Nos Critérios do Teste da PGMAIS
+       Link Das Instruções do Teste: https://github.com/pgmais/teste-dev
 #### 5. Como Testar?
        Existe Um Arquivo txt Dentro do Diretório do Projeto, de nome: exemplo-mensagens.txt
        Dentro deste Arquivo Existe mais de 15 Variações de Mensagens Para Serem Filtradas Pela Aplicação
