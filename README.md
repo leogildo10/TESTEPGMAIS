@@ -10,7 +10,7 @@
     Faça download do repositório 
 #### 3. Rodar o Projeto
    Copie e Cole o Projeto Baixado dentro da pasta: C:\xampp\htdocs  
-   Abrir o Xammp Control Panel (na barra de pesquisa do windows digitar: Xampp Control Panel e Pressionar Enter)  
+   Abrir o Xammp Control Panel (Na Barra de Pesquisa do Windows Digitar: Xampp Control Panel e Pressionar Enter)  
    No Painel de Controle do Xampp Clicar em Start, Para Iniciar o Servidor  
-   Abrir seu Navegador (recomendo o Google Chrome) e Digite: http://localhost/TESTEPGMAIS/  
+   Abrir Seu Navegador (Recomendo o Google Chrome) e Digite: http://localhost/TESTEPGMAIS/  
    Se Abrir a Página: index Então Você Conseguiu Rodar o Projeto Corretamente!
