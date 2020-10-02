@@ -15,4 +15,6 @@
        Abrir Seu Navegador (Recomendo o Google Chrome) e Digite: http://localhost/TESTEPGMAIS/  
        Se Abrir a Página: index Então Você Conseguiu Rodar o Projeto Corretamente!
 #### 4. Como Testar?
-       Existe Um Arquivo txt Dentro do Diretório do projeto, de nome: exemplo-mensagens.txt
+       Existe Um Arquivo txt Dentro do Diretório do Projeto, de nome: exemplo-mensagens.txt
+       Dentro deste Arquivo Existe mais de 15 Variações de Mensagens Para Serem Filtradas Pela Aplicação
+       Cada Mensagem Possui Uma Descrição do teste Em Que se Encaixa, essa descrição è o Corpora Da Mensagem Em Sí, Exemplo: NÚMERO DE TELEFONE não começa com 9,  deverá ser bloqueada
