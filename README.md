@@ -25,3 +25,11 @@
        Cada Mensagem Possui Uma Descrição do Teste Em Que se Encaixa, essa descrição è o Corpora Da Mensagem Em Sí, Exemplo: NÚMERO DE TELEFONE não começa com 9,  deverá ser bloqueada
        Para Adicionar Seus Próprios Testes, Apenas Adicione Mais Mensagens Neste Arquivo Baseando-se Nos Modelos dos testes Existentes.
        Ou Você Pode Criar Um Outro Arquivo, Com Outros Testes e Subir no Sistema
+#### 6. Ambiente de Desenvolvimento
+       Para o Desenvolvimento do Projeto Utilizou-se as Seguintes Tecnologias
+       PHP - Linguagem de Programação
+       HTML/CSS/JS/JQUERY - Para FrontEnd
+       SERVIDOR - XAMPP
+       IDE - Visual Stúdio Code
+       SO - Windows 10
+       LIBS: curl, file_uploads
